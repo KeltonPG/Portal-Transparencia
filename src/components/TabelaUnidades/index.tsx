@@ -1,6 +1,6 @@
 import type { Unidade } from '../../types/Unidade';
 import type { Despesa } from '../../types/Despesa';
-//import './TabelaUnidades.scss';
+import './TabelaUnidades.scss';
 
 type Props = {
   unidades: Unidade[] | Despesa[];

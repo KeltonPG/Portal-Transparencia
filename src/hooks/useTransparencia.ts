@@ -60,13 +60,14 @@ export function useTransparencia() {
   }, [unidades, codigoUnidade]);
 
   const totalGastosNoAno = useMemo(() => {
-    return despesas.reduce((soma, d) => soma + d.valor, 0);
+    return despesas.reduce((soma, d: any) => soma + Number(d.valor_emp), 0);
   }, [despesas]);
 
   return {
     carregando,
     erro,
     unidades: unidadesFiltradas,
+    despesas,
     totalGastosNoAno,
     quantidadeOrgaos: unidades.length,
     licitacoes: 68, // TODO conectar endpoint de licitações

@@ -21,3 +21,9 @@ export async function buscarUnidades(): Promise<Unidade[]> {
   const { data } = await api.get('/api/consulta-unidades');
   return data;
 }
+
+// GET /api/consulta-notas
+export async function buscarNotas(params: { ano: string; codigo_ug: string }): Promise<any[]> {
+  const { data } = await api.get('/api/consulta-notas', { params });
+  return data;
+}
