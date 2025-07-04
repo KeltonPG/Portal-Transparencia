@@ -35,7 +35,7 @@ export default function Dashboard() {
         </div>
 
         <h2>Unidades</h2>
-        <TabelaUnidades unidades={t.unidades} />
+        <TabelaUnidades unidades={t.unidades} tipo="unidades" />
       </main>
     </>
   );

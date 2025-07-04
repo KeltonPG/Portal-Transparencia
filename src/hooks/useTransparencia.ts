@@ -2,12 +2,18 @@ import { useEffect, useState, useMemo } from 'react';
 import { buscarDespesas, buscarUnidades } from '../services/api';
 import type { Unidade } from '../types/Unidade'; 
 import type { Despesa } from '../types/Despesa';
+import { useDebounce } from './useDebounce';
 
 export function useTransparencia() {
   // filtros controlados
   const [ano, setAno] = useState('');
   const [mes, setMes] = useState('');
   const [codigoUnidade, setCodigoUnidade] = useState('');
+
+  // debounce dos filtros
+  const debouncedAno = useDebounce(ano, 500);
+  const debouncedMes = useDebounce(mes, 500);
+  const debouncedCodigoUnidade = useDebounce(codigoUnidade, 500);
 
   // dados
   const [despesas, setDespesas] = useState<Despesa[]>([]);
@@ -29,25 +35,28 @@ export function useTransparencia() {
       .finally(() => setLoadingUnidades(false));
   }, []);
 
-  // carregar despesas sempre que filtros mudarem
+  // carregar despesas sempre que filtros mudarem (com debounce)
   useEffect(() => {
-    if (!ano) {
-      // limpa despesas e garante que loader não fique ativo
+    // Validação: todos obrigatórios e numéricos
+    const anoValido = debouncedAno && !isNaN(Number(debouncedAno));
+    const mesValido = debouncedMes && !isNaN(Number(debouncedMes));
+    const codigoValido = debouncedCodigoUnidade && !isNaN(Number(debouncedCodigoUnidade));
+    if (!anoValido || !mesValido || !codigoValido) {
       setDespesas([]);
       return;
     }
 
     setLoadingDespesas(true);
-    buscarDespesas({ ano, mes, codigo_ug: codigoUnidade })
+    buscarDespesas({ ano: debouncedAno, mes: debouncedMes, codigo_ug: debouncedCodigoUnidade })
       .then(setDespesas)
       .catch((e) => setErro(e.message))
       .finally(() => setLoadingDespesas(false));
-  }, [ano, mes, codigoUnidade]);
+  }, [debouncedAno, debouncedMes, debouncedCodigoUnidade]);
 
   // derivados
   const unidadesFiltradas = useMemo(() => {
     if (!codigoUnidade) return unidades;
-    return unidades.filter((u) => u.codigo.includes(codigoUnidade));
+    return unidades.filter((u: any) => u && u.codigo_unidade && typeof u.codigo_unidade === 'string' && u.codigo_unidade.includes(codigoUnidade));
   }, [unidades, codigoUnidade]);
 
   const totalGastosNoAno = useMemo(() => {
