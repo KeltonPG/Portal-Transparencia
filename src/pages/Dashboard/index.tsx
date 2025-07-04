@@ -17,7 +17,8 @@ export default function Dashboard() {
     <>
       <Cabecalho />
       <main className="dashboard">
-        <div className="buscas">
+        <h1 className="titulo-principal">Portal da transparência do Maranhão</h1>
+        <div className="filtros">
           <SearchInput placeholder="Pesquisar por ano" value={t.ano} onChange={t.setAno} />
           <SearchInput placeholder="Pesquisar por mês" value={t.mes} onChange={t.setMes} />
           <SearchInput
@@ -27,7 +28,7 @@ export default function Dashboard() {
           />
         </div>
 
-        <div className="cards">
+        <div className="resumo">
           <SummaryCard titulo={`Total de gastos em ${t.ano || '…'}`} valor={`R$ ${t.totalGastosNoAno.toLocaleString('pt-BR')}`} />
           <SummaryCard titulo="Quantidade de órgãos" valor={t.quantidadeOrgaos} />
           <SummaryCard titulo="Licitações" valor={t.licitacoes} />

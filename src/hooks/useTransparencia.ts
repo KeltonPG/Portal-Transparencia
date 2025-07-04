@@ -1,10 +1,10 @@
 import { useEffect, useState, useMemo } from 'react';
 import { buscarDespesas, buscarUnidades } from '../services/api';
-import type { Unidade } from '../types/Unidade';
+import type { Unidade } from '../types/Unidade'; 
 import type { Despesa } from '../types/Despesa';
 
 export function useTransparencia() {
-  // states de busca
+  // filtros controlados
   const [ano, setAno] = useState('');
   const [mes, setMes] = useState('');
   const [codigoUnidade, setCodigoUnidade] = useState('');
@@ -12,53 +12,57 @@ export function useTransparencia() {
   // dados
   const [despesas, setDespesas] = useState<Despesa[]>([]);
   const [unidades, setUnidades] = useState<Unidade[]>([]);
-  const [carregando, setCarregando] = useState(true);
+
+  // loaders individuais (evita loader infinito)
+  const [loadingUnidades, setLoadingUnidades] = useState(true);
+  const [loadingDespesas, setLoadingDespesas] = useState(false);
+  const carregando = loadingUnidades || loadingDespesas;
+
   const [erro, setErro] = useState<string | null>(null);
 
-  // carregar dados brutos
-  async function carregar() {
-    setCarregando(true);
-    try {
-      const [d, u] = await Promise.all([buscarDespesas(), buscarUnidades()]);
-      setDespesas(d);
-      setUnidades(u);
-    } catch (e: any) {
-      setErro(e.message || 'Erro desconhecido');
-    } finally {
-      setCarregando(false);
-    }
-  }
-
+  // carregar unidades uma única vez
   useEffect(() => {
-    carregar();
+    setLoadingUnidades(true);
+    buscarUnidades()
+      .then(setUnidades)
+      .catch((e) => setErro(e.message))
+      .finally(() => setLoadingUnidades(false));
   }, []);
 
-  // filtros locais (feito em memo para não recalcular sempre)
+  // carregar despesas sempre que filtros mudarem
+  useEffect(() => {
+    if (!ano) {
+      // limpa despesas e garante que loader não fique ativo
+      setDespesas([]);
+      return;
+    }
+
+    setLoadingDespesas(true);
+    buscarDespesas({ ano, mes, codigo_ug: codigoUnidade })
+      .then(setDespesas)
+      .catch((e) => setErro(e.message))
+      .finally(() => setLoadingDespesas(false));
+  }, [ano, mes, codigoUnidade]);
+
+  // derivados
   const unidadesFiltradas = useMemo(() => {
     if (!codigoUnidade) return unidades;
     return unidades.filter((u) => u.codigo.includes(codigoUnidade));
   }, [unidades, codigoUnidade]);
 
   const totalGastosNoAno = useMemo(() => {
-    if (!ano) return 0;
-    return despesas
-      .filter((d) => d.ano.toString() === ano)
-      .reduce((soma, d) => soma + d.valor, 0);
-  }, [despesas, ano]);
+    return despesas.reduce((soma, d) => soma + d.valor, 0);
+  }, [despesas]);
 
-  const quantidadeOrgaos = unidades.length;
-
-  // interface pública
   return {
-    // dados prontos
     carregando,
     erro,
     unidades: unidadesFiltradas,
     totalGastosNoAno,
-    quantidadeOrgaos,
-    licitacoes: 68, // placeholder até conectar endpoint
+    quantidadeOrgaos: unidades.length,
+    licitacoes: 68, // TODO conectar endpoint de licitações
 
-    // controles
+    // filtros controlados
     ano,
     setAno,
     mes,

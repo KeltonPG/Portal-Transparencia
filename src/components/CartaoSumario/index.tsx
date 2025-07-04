@@ -8,8 +8,8 @@ type Props = {
 export default function SummaryCard({ titulo, valor }: Props) {
   return (
     <div className="summary-card">
-      <span>{titulo}</span>
-      <strong>{valor}</strong>
+      <span className="titulo">{titulo}</span>
+      <strong className="valor">{valor}</strong>
     </div>
   );
 }

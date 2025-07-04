@@ -1,0 +1,22 @@
+.summary-card {
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  min-width: 200px;
+  text-align: center;
+
+  .titulo {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #6b7280; // cinza suave
+    margin-bottom: 0.25rem;
+    display: block;
+  }
+
+  .valor {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2563eb; // azul forte
+  }
+}
