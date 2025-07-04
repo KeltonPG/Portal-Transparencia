@@ -70,7 +70,7 @@ export function useTransparencia() {
     despesas,
     totalGastosNoAno,
     quantidadeOrgaos: unidades.length,
-    licitacoes: 68, // TODO conectar endpoint de licitações
+    licitacoes: 68,
 
     // filtros controlados
     ano,

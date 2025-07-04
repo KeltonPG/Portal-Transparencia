@@ -1,4 +1,3 @@
-import Cabecalho from '../../components/Cabecalho';
 import SearchInput from '../../components/AreaPesquisa';
 import SummaryCard from '../../components/CartaoSumario';
 import TabelaUnidades from '../../components/TabelaUnidades';
@@ -40,7 +39,6 @@ export default function Dashboard() {
 
   return (
     <>
-      <Cabecalho />
       <main className="dashboard">
         <h1 className="titulo-principal">Portal da transparência do Maranhão</h1>
         <div className="filtros">
