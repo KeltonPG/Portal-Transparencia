@@ -1,0 +1,14 @@
+.erro-mensagem {
+    background: #ffe5e5;
+    border: 1px solid #ff5c5c;
+    padding: 1rem;
+    margin: 2rem;
+    color: #b30000;
+    border-radius: 8px;
+    font-family: monospace;
+  
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+    }
+  }
