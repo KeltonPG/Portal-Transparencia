@@ -1,0 +1,77 @@
+.erroMensagem {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #b71c1c;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.icone {
+  font-size: 3.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.titulo {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: #b71c1c;
+}
+
+.mensagem {
+  background: #ffeaea;
+  color: #b71c1c;
+  border-radius: 10px;
+  padding: 1.2rem 2.2rem;
+  font-size: 1.15rem;
+  margin: 0 auto;
+  white-space: pre-wrap;
+  max-width: 90vw;
+  box-shadow: 0 2px 12px rgba(183,28,28,0.07);
+}
+
+.botaoVoltar {
+  margin-top: 1.5rem;
+  padding: 0.9rem 2.5rem;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+}
+
+.botaoVoltar:hover {
+  background: #1251a3;
+  transform: translateY(-2px) scale(1.04);
+}
+
+@media (max-width: 600px) {
+  .erroMensagem {
+    padding: 1rem;
+    gap: 1.2rem;
+  }
+  .mensagem {
+    padding: 1rem 0.5rem;
+    font-size: 1rem;
+  }
+  .titulo {
+    font-size: 1.2rem;
+  }
+  .icone {
+    font-size: 2.2rem;
+  }
+  .botaoVoltar {
+    font-size: 1rem;
+    padding: 0.7rem 1.2rem;
+  }
+}
