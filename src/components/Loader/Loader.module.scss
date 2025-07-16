@@ -29,6 +29,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  position: relative; // necessário pra posicionar o botão dentro da box
 }
 
 .spinner {
@@ -38,6 +39,22 @@
   border-top: 4px solid #1976d2;
   border-radius: 50%;
   animation: spin 1s linear infinite;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #999;
+  padding: 0.2rem;
+
+  &:hover {
+    color: #333;
+  }
 }
 
 @keyframes spin {
