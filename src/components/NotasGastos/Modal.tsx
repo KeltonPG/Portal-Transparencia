@@ -22,12 +22,10 @@ interface ModalProps {
 export default function Modal({ isOpen, onClose, notas = [], carregandoNotas, erroNotas }: ModalProps) {
   if (!isOpen) return null;
   
-  // Se estiver carregando, mostra apenas o Loader
   if (carregandoNotas) {
     return <Loader onClose={onClose} />;
   }
   
-  // Se não estiver carregando, mostra o modal com as notas
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
