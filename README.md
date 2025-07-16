@@ -1,69 +1,106 @@
-# React + TypeScript + Vite
+# Portal da Transparência do Maranhão
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Uma aplicação web moderna para visualização e consulta de dados de transparência do estado do Maranhão, desenvolvida com React e TypeScript.
 
-Currently, two official plugins are available:
+## 🚀 Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Dashboard Interativo**: Visualização de gastos, órgãos e licitações
+- **Filtros Avançados**: Busca por ano, mês e código da unidade
+- **Tabela de Unidades**: Lista completa de unidades gestoras com dados detalhados
+- **Modal de Notas**: Visualização detalhada de notas fiscais por despesa
+- **Interface Responsiva**: Design adaptável para diferentes dispositivos
+- **Carregamento Inteligente**: Indicadores de carregamento com possibilidade de cancelamento
 
-## Expanding the ESLint configuration
+## 🛠️ Tecnologias Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 18** - Biblioteca JavaScript para interfaces
+- **TypeScript** - Tipagem estática para JavaScript
+- **Vite** - Build tool e dev server
+- **SCSS/CSS Modules** - Estilização modular
+- **React Icons** - Ícones para a interface
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📦 Instalação
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/KeltonPG/Portal-Transparencia.git
+   cd Portal-Transparencia
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. **Instale as dependências**
+   ```bash
+   npm install
+   ```
+
+3. **Execute o projeto**
+   ```bash
+   npm run dev
+   ```
+
+4. **Acesse a aplicação**
+   ```
+   http://localhost:5173
+   ```
+
+## 🏗️ Estrutura do Projeto
+
+```
+src/
+├── components/          # Componentes reutilizáveis
+│   ├── AreaPesquisa/    # Inputs de busca
+│   ├── Cabecalho/       # Cabeçalho da aplicação
+│   ├── CartaoSumario/   # Cards de resumo
+│   ├── ErroMensagem/    # Componente de erro
+│   ├── Loader/          # Indicador de carregamento
+│   ├── NotasGastos/     # Modal de notas fiscais
+│   └── TabelaUnidades/  # Tabela de unidades
+├── hooks/               # Custom hooks
+├── pages/               # Páginas da aplicação
+├── services/            # Serviços de API
+├── styles/              # Estilos globais
+├── types/               # Definições de tipos
+└── utils/               # Utilitários
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🎯 Como Usar
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Dashboard Principal
+- Visualize o total de gastos por ano
+- Consulte a quantidade de órgãos
+- Acesse informações sobre licitações
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Filtros de Busca
+- **Ano**: Digite o ano desejado (ex: 2023)
+- **Mês**: Digite o mês (ex: 02)
+- **Código da Unidade**: Pesquise por código específico
+
+### Visualização de Notas
+1. Clique em qualquer linha da tabela de despesas
+2. O modal abrirá com o carregamento das notas
+3. Visualize os detalhes das notas fiscais
+4. Use o botão "X" para cancelar o carregamento se necessário
+
+## 🔧 Scripts Disponíveis
+
+```bash
+npm run dev          # Inicia o servidor de desenvolvimento
+npm run build        # Gera build de produção
+npm run preview      # Visualiza o build de produção
+npm run lint         # Executa o linter
 ```
+
+
+## 🎨 Design System
+
+- **Cores**: Paleta baseada em azuis e cinzas
+- **Tipografia**: Inter como fonte principal
+- **Espaçamento**: Sistema de espaçamento consistente
+- **Bordas**: Cantos arredondados (8px - 12px)
+
+## 🔍 Funcionalidades Técnicas
+
+- **CSS Modules**: Estilos isolados por componente
+- **TypeScript**: Tipagem forte para melhor manutenibilidade
+- **Hooks Customizados**: Lógica reutilizável
+- **Tratamento de Erros**: Interface amigável para erros
+- **Loading States**: Indicadores visuais de carregamento
